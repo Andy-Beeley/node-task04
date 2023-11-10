@@ -1,10 +1,7 @@
-ARG NODE_VERSION=latest
+FROM node:latest
 
-FROM node:${NODE_VERSION}
-
-# Use production node environment by default.
-ENV NODE_ENV production
-
+# Copy the rest of the source files into the image.
+COPY package*.json ./
 
 WORKDIR /app
 
@@ -12,7 +9,7 @@ WORKDIR /app
 # Leverage a cache mount to /root/.npm to speed up subsequent builds.
 # Leverage a bind mounts to package.json and package-lock.json to avoid having to copy them into
 # into this layer.
-RUN npm install node
+RUN npm install
 
 # Copy the rest of the source files into the image.
 COPY . .

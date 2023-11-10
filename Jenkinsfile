@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh "docker build -t node-image ."
+                        sh "docker build -t node-image:$(BUILD_NUMBER) ."
                     } catch (Exception e) {
                         echo "Failed to build images"
                     }
@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh "docker run -d -p 80:5000 --network node-network --name node-app node-image"
+                        sh "docker run -d -p 80:5000 --network node-network --name node-app node-image:$(BUILD_NUMBER)"
                     } catch (Exception e) {
                         echo "Failed to run node app container"
                     }
