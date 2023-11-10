@@ -18,4 +18,4 @@ COPY . .
 EXPOSE 5000
 
 # Run the application.
-ENTRYPOINT [ "npm", "start"]
+ENTRYPOINT ["node", "index.js"]
